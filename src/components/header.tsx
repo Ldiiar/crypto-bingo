@@ -22,7 +22,7 @@ export default function Header() {
             <Logo/>
                 <ul className='flex gap-8'>
                  { options.map( (option) => {
-                    return <li className='cursor-pointer font-medium transition hover:text-main_third/90'>{option.name}</li>
+                    return <li className='cursor-pointer font-medium transition hover:text-main_third/90' key={option.link}>{option.name}</li>
                   })}
                 </ul>
         </div>

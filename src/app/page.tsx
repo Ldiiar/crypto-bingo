@@ -1,6 +1,7 @@
 import H1 from '@/components/h1';
 import { Button } from '@/components/ui/button';
 import { TextEffect } from '@/components/ux/text-effect';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
 	return (
 		<main className='flex flex-col items-center mt-6'>
       <div className="flex flex-col items-center w-full">
-        <img src={gifSrc} alt='Image' width={200} height={200} className='w-1/2 min-w-[300px] h-48 mb-14 mt-10'/>
+        <Image src={gifSrc} alt='Image' width={200} height={200} className='w-1/2 min-w-[300px] h-48 mb-14 mt-10'/>
         <H1>
             <TextEffect per='word' as='span' preset='slide'>
               {slogan}
