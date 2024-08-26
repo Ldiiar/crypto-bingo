@@ -23,7 +23,7 @@ export default function BurgerMenu({options}: BurgerMenuProps) {
     <Hamburger toggled={isOpen} toggle={setIsOpen} />
     {
      isOpen &&  
-     <nav className='absolute top-16 right-5 bg-white p-4 min-w-[200px] h-[400px] z-50'>
+     <nav className='absolute top-16 right-5 bg-white p-4 min-w-[250px] h-[350px] z-50'>
         <ul className='flex flex-col justify-center items-center gap-y-4 h-full w-full'>
         { options.map( (option) => {
             return <Link href={option.link} key={option.link}>
