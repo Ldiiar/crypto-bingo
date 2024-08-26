@@ -14,11 +14,11 @@ export default function Home() {
         <Image src={gifSrc} alt='Image' width={200} height={200} className='w-1/2 min-w-[300px] h-48 mb-14 mt-10'/>
         <H1>
         <TextEffect per='word' as='span' preset='slide'>
-            {slogan.replace(/'/g, '&apos;')}
+            {slogan}
            </TextEffect>
         </H1>
         <Link href='/home'>
-          <Button size="lg" variant='destructive'>Let's get started</Button>
+          <Button size="lg" variant='destructive'>Let&apos;s get started</Button>
         </Link>
       </div>
 		</main>
