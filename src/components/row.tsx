@@ -1,6 +1,7 @@
 'use client'
 import { RootState } from '@/features/store'
 import { changeColor, cn, shortenNumber } from '@/lib/utils'
+import Image from 'next/image'
 import { useSelector } from 'react-redux'
 
 type RowProps = {
@@ -63,11 +64,19 @@ return (
     <section className='flex items-end text-sm'>
         <span className={tagStyles}>{data?.market_cap_rank}</span>
         <span className={coinStyles}>
-          <img src={data?.image} alt="Logo" className='w-[25px] mr-4'/>
-          <div className="flex flex-col sm:flex-row sm:justify-start">
-            {data?.name}
-            <span className='opacity-80 font-light text-xs sm:ml-2'>{data?.symbol.toLocaleUpperCase()}</span>
-          </div>
+          {
+            data?.image &&
+            <>
+              <Image src={data.image} alt="Logo"
+              width={30}
+              height={30}
+              className='w-[25px] mr-4'/>
+              <div className="flex flex-col sm:flex-row sm:justify-start">
+                {data?.name}
+                <span className='opacity-80 font-light text-xs sm:ml-2'>{data?.symbol.toLocaleUpperCase()}</span>
+              </div>
+            </>
+          }
         </span>
         <span className={priceStyles}>{currSign}{data?.current_price}</span>
         <span className={oneHourChangeStyles(changeColor(changeIn1h))}>{changeIn1h === '-0.0' ? '0.0' : changeIn1h}%</span>

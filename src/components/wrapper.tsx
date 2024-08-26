@@ -37,7 +37,7 @@ export default function Wrapper({children} : WrapperProps) {
      
     }
     storedata()
-  }, [currency, amountPerPage, page])
+  }, [dispatch, currency, amountPerPage, page])
   
   return (
     <>
