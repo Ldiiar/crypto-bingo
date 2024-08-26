@@ -8,7 +8,6 @@ export default function PerPageSelector() {
   const dispatch = useDispatch()
   const handleChange = (value: string) => {
     dispatch(updateAmountPerPage(value))
-    console.log('Amount changed to: ', value);
   }
 
 

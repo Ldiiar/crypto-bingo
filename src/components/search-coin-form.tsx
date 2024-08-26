@@ -16,7 +16,6 @@ export default function SearcCoinForm() {
 			} else {
 				dispatch(updateSearchingPrompt(e.target.value))
 			}
-			console.log(e.target.value);
 		}
 
 

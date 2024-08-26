@@ -15,8 +15,6 @@ type DashboardProps = {
 
 export default function Dashboard({}: DashboardProps) {
   
-  const pathname = usePathname()
-  console.log(pathname);
   
   const currentPage = useSelector((state: RootState) => state.coinsMarket.pageToSearch)
   const allCoinsData = useSelector((state: RootState) => state.coinsMarket.coinsMarket)

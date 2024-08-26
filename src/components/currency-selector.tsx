@@ -9,7 +9,6 @@ export default function CurrencySelector() {
  
   const handleValueChange = (value: string) => {
     dispatch(updateCurrency(value.toLowerCase()))
-    console.log(value.toLowerCase());
   }
 
   

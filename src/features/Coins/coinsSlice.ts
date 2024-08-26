@@ -59,8 +59,6 @@ export const fetchAllCoinsByOptionsAsync = createAsyncThunk(
 	'users/fetchAllCoinsByOptionsAsync',
 	async ({currency, amountPerPage, page}: TFetchAllCoinsByOptionsAsync) => {
 		const response = await fetchAllCoinsByOptions(currency, amountPerPage, page)
-		console.log("THUNK PROCESS: ", response);
-		
 		return response
 	}
   )

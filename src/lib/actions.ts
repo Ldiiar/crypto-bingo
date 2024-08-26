@@ -5,7 +5,6 @@ const BASE_URL = process.env.BASE_URL
 
 export async function searchCoinById(formData: FormData) {
       const coinId = formData.get('coinName');
-      console.log('COIN TO SEARCH: ', coinId);
 
       async function getCoinById(id: any | null) {
         const coinId = id?.toLowerCase()
@@ -28,7 +27,6 @@ export async function searchCoinById(formData: FormData) {
     }
 
       const coinData = await getCoinById(coinId)
-      console.log('COIN DATA FOUND: ', coinData);
       return coinData
 
   }
@@ -43,7 +41,6 @@ export async function searchCoinById(formData: FormData) {
         
         const res = await fetch(`${BASE_URL}/coins/markets?vs_currency=${currency}&per_page=${amountPerPage}&page=${page}&price_change_percentage=1h%2C24h%2C7d`, options)
         const data = res.json()
-        console.log('SERVER ACTION: ', data);
         
         return data
         } catch (error) {
