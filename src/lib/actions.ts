@@ -1,7 +1,7 @@
 'use server'
 
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+const API_KEY = process.env.API_KEY
+const BASE_URL = process.env.BASE_URL
 
 export async function searchCoinById(formData: FormData) {
       const coinId = formData.get('coinName');
