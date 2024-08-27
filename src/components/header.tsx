@@ -2,13 +2,14 @@
 import { usePathname } from 'next/navigation';
 import BurgerMenu from './burger-menu';
 import Logo from './logo';
+import Link from 'next/link';
 
 export default function Header() {
   const pathname = usePathname()
 
   const options = [
     {
-      name: 'Market',
+      name: 'Markets',
       link: 'home',
       active: pathname.includes('home') ? true : false
     },
@@ -31,8 +32,10 @@ export default function Header() {
             <nav className='hidden lg:flex'>
                 <ul className='flex gap-8'>
                  { options.map( (option) => {
-                   return <li className={`cursor-pointer font-medium transition hover:text-main_third/90 hover:border-b-2 pt-1 hover:border-main_third  
-                    ${option.active ? 'border-b-2 border-main_third text-main_third' : 'border-b-2 border-transparent'}`} key={option.link}>{option.name}</li>
+                   return <Link href={option.link} key={option.link}>
+                      <li className={`cursor-pointer font-medium transition hover:text-main_third/90 hover:border-b-2 pt-1 hover:border-main_third  
+                      ${option.active ? 'border-b-2 border-main_third text-main_third' : 'border-b-2 border-transparent'}`} key={option.link}>{option.name}</li>
+                     </Link>
                   })}
                 </ul>
             </nav>

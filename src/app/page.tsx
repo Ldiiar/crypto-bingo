@@ -9,7 +9,7 @@ export default function Home() {
   const slogan = 'Empower your financial future - explore the world of cryptocurrency.'
 	const gifSrc = 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWltMWlsamFrYXQzd2ppbXlrdHExMm56d3p6em8xcjU3NWFvYTljYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYResEdNIyniuL6/giphy.webp'
 	return (
-		<main className='flex flex-col items-center mt-6'>
+		<main className='flex flex-col items-center mt-6 mb-[100px]'>
       <div className="flex flex-col items-center w-full">
         <Image src={gifSrc} alt='Image' width={200} height={200} className='w-1/2 min-w-[300px] h-48 mb-14 mt-10'/>
         <H1>
