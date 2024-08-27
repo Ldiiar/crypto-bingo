@@ -20,14 +20,30 @@ export default function Footer() {
           <section className='flex flex-col gap-y-4 sm:flex-row sm:gap-y-0 justify-between items-center'>
             <span className='text-main_fourth font-semibold text-lg'>Community:</span>
             <div className="flex gap-x-2">
+              <a href='https://www.facebook.com/' target="_blank" rel="noopener noreferrer">
               <FaFacebook className={iconsStyles}/>
+              </a>
+              <a href="https://x.com/?lang=en" target="_blank" rel="noopener noreferrer">
               <BsTwitterX className={iconsStyles}/>
+              </a>
+              <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">
               <FaReddit className={iconsStyles}/>
+              </a>
+              <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer">
               <FaTelegramPlane className={iconsStyles}/>
+              </a>
+              <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
               <FaYoutube className={iconsStyles}/>
+              </a>
+              <a href="https://discord.com/" target="_blank" rel="noopener noreferrer">
               <FaDiscord className={iconsStyles}/>
+              </a>
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
               <AiFillInstagram className={iconsStyles}/>
+              </a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
               <FaLinkedinIn className={iconsStyles}/>
+              </a>
             </div>
           </section>
           <section className='space-y-4 border-b border-main_secondary py-6'>
