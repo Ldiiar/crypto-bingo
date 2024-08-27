@@ -1,5 +1,4 @@
 import Container from './container';
-import Logo from './logo';
 
 //icons
 import { FaFacebook } from "react-icons/fa";
@@ -12,10 +11,12 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 
 
+
 export default function Footer() {
+ 
   const iconsStyles = 'w-[26px] h-[26px] text-main_fourth border border-gray-300 p-1 rounded-full hover:border-b-[1.5px] hover:border-main_third cursor-pointer'
   return (
-    <footer className='bg-white w-full py-[40px] px-2 text-black/50 mt-auto text-xs'>
+    <footer className='bg-white w-full py-[40px] text-black/50 mt-auto text-xs'>
         <Container>
           <section className='flex flex-col gap-y-4 sm:flex-row sm:gap-y-0 justify-between items-center'>
             <span className='text-main_fourth font-semibold text-lg'>Community:</span>

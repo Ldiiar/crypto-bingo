@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation';
 import BurgerMenu from './burger-menu';
 import Logo from './logo';
 import Link from 'next/link';
+import Container from './container';
 
 export default function Header() {
   const pathname = usePathname()
@@ -27,7 +28,8 @@ export default function Header() {
   
   return (
     <header className='flex w-full h-20 items-center bg-main_primary ' >
-        <div className="flex w-full max-w-[1300px] m-auto text-main_fourth justify-between items-center pl-4 pr-4">
+      <Container>
+        <div className="flex w-full text-main_fourth justify-between items-center">
             <Logo/>
             <nav className='hidden lg:flex'>
                 <ul className='flex gap-8'>
@@ -43,6 +45,7 @@ export default function Header() {
                   <BurgerMenu options={options}/>
                 </div>
         </div>
+      </Container>
     </header>
   )
 }

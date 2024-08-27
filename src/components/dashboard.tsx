@@ -6,7 +6,6 @@ import { getSearchedCoin } from '@/lib/utils';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { TablePagination } from './table-pagination';
-import { usePathname } from 'next/navigation';
 
 
 type DashboardProps = {
