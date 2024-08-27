@@ -20,15 +20,12 @@ export async function searchCoinById(formData: FormData) {
             
           return data
         } catch (error) {
-          return {
-            message: 'Something went wrong while searching for coin data'
-          }
+          return null
         }
     }
 
       const coinData = await getCoinById(coinId)
       return coinData
-
   }
 
 

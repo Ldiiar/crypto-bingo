@@ -18,13 +18,13 @@ export default function Home() {
             {slogan}
            </TextEffect>
         </H1>
-        <p className='text-zinc-500 mb-[10px] font-semibold'>It&apos;s a free platform</p>
+        <p className='text-main_secondary mb-[10px] font-semibold'>It&apos;s a free platform</p>
         <Link href='/home'>
           <Button size="lg" variant='destructive'>Let&apos;s get started</Button>
         </Link>
       </div>
       <section className='w-full gap-2 items-center'>
-        <h4 className='text-xl md:text-2xl xl:text-3xl  font-bold text-center mb-[20px]'>Frequently Asked Questions</h4>
+        <h4 className='text-xl md:text-2xl xl:text-3xl font-bold text-center mb-[20px]'>Frequently Asked Questions</h4>
         <AccordionBlock />
       </section>
 		</main>

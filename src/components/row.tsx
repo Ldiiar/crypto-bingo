@@ -1,28 +1,20 @@
 'use client'
 import { RootState } from '@/features/store'
-import { changeColor, cn, shortenNumber } from '@/lib/utils'
+import { changeColor, cn, getCurrencySign, shortenNumber } from '@/lib/utils'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 
 type RowProps = {
-    data?: Coin
+    data?: Coin | null
     type?: 'description' | undefined
 }
 
 export default function Row({data, type}: RowProps) {
+  console.log('ROW get:',data);
+  
   const generalOfRow = 'py-3'
   const currency = useSelector((state: RootState) => state.coinsMarket.currency)
-  function getCurrencySign() {
-    switch (currency) {
-      case 'usd':
-        return '$'
-      case 'eur':
-        return '€'
-      case 'inr':
-        return '₹'
-    }
-  }
-  const currSign = getCurrencySign()
+  const currSign = getCurrencySign(currency)
 
 
   //styles
@@ -41,6 +33,8 @@ export default function Row({data, type}: RowProps) {
   const marketCapStyles = `w-[18%] hidden lg:flex ${generalOfRow} justify-end`
   const volumeStyles = `w-[30%] hidden sm:flex md:w-[22%] lg:w-[18%] ${generalOfRow} justify-end`
   
+
+
   if (type === 'description') {
     return (
       <section className='flex items-end font-semibold text-xs border-b border-main_primary'>

@@ -9,6 +9,7 @@ type TinitialState = {
 	currency: 'usd' | 'eur' | 'inr'
 	amountPerPage: '10' | '20' | '50' | '100'
 	pageToSearch: string
+	selectedCoin: Coin[] | null
 }
 
 let initialState: TinitialState = {
@@ -16,7 +17,8 @@ let initialState: TinitialState = {
 	searchingPrompt: null,
 	amountPerPage: '10',
 	currency: 'usd',
-	pageToSearch: '1'
+	pageToSearch: '1',
+	selectedCoin: null
 };
 
 const burgerSlice = createSlice({
@@ -37,6 +39,10 @@ const burgerSlice = createSlice({
 		},
 		updatePageToSearch: (state, {payload}) => {
 			state.pageToSearch = payload
+		},
+		updateSelectedCoin: (state, {payload}) => {
+			state.selectedCoin = payload
+			
 		}
 	},
 	extraReducers: (builder) => {
@@ -66,5 +72,6 @@ export const fetchAllCoinsByOptionsAsync = createAsyncThunk(
 
 
 export default burgerSlice.reducer;
-export const { updateCoinsMarket, updateSearchingPrompt, updateCurrency, updateAmountPerPage, updatePageToSearch} = burgerSlice.actions;
+export const { updateCoinsMarket, updateSearchingPrompt, updateCurrency, updateAmountPerPage, updateSelectedCoin,
+	updatePageToSearch} = burgerSlice.actions;
 

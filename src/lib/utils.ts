@@ -54,3 +54,14 @@ export const validatePageValue = (number: string) => {
   } 
     return `${newNumber}`
 }
+
+export function getCurrencySign(currency: "usd" | "eur" | "inr") {
+  switch (currency) {
+    case 'usd':
+      return '$'
+    case 'eur':
+      return '€'
+    case 'inr':
+      return '₹'
+  }
+}

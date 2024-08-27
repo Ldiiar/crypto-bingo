@@ -14,22 +14,27 @@ type DashboardProps = {
 
 export default function Dashboard({}: DashboardProps) {
   
-  
+  const selectedCoin = useSelector((state: RootState) => state.coinsMarket.selectedCoin)
   const currentPage = useSelector((state: RootState) => state.coinsMarket.pageToSearch)
   const allCoinsData = useSelector((state: RootState) => state.coinsMarket.coinsMarket)
   const searchingPrompt = useSelector((state: RootState) => state.coinsMarket.searchingPrompt)
 
   // const slicedData = allCoinsData?.slice(0, parseInt(amountPerPage))
 
-  const data = searchingPrompt !== null 
-  ? getSearchedCoin(allCoinsData, searchingPrompt)
+  const data = selectedCoin !== null 
+  // ? getSearchedCoin(allCoinsData, searchingPrompt)
+  ? selectedCoin
   : allCoinsData
   
+
 
   const renderCoinsMarket = data?.map(item => {
       return <Row data={item} key={item.id}/>
   })
-  updateCoinsMarket
+
+  // updateCoinsMarket
+  console.log(selectedCoin);
+  
 
   return (
     <>
