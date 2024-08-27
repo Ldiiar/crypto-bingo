@@ -41,9 +41,9 @@ import {
     ]
 
     const renderFAQs = FAQs.map(item => {
-      return <AccordionItem value={`Item-${item.number}`}>
-      <AccordionTrigger>{item.question}</AccordionTrigger>
-      <AccordionContent> {item.answer} </AccordionContent>
+      return <AccordionItem value={`Item-${item.number}`} key={item.number}>
+      <AccordionTrigger className='md:font-semibold md:text-lg xl:text-xl'>{item.question}</AccordionTrigger>
+      <AccordionContent className='text-zinc-600 lg:text-base'> {item.answer} </AccordionContent>
     </AccordionItem>
     })
     return (
