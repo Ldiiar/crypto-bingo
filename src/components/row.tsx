@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 type RowProps = {
     data?: Coin | null
-    type?: 'description' | undefined
+    type?: 'description' | 'searchedCoin' | undefined
 }
 
 export default function Row({data, type}: RowProps) {
@@ -50,9 +50,9 @@ export default function Row({data, type}: RowProps) {
     )
   }
 
-  const changeIn1h = shortenNumber(data?.price_change_percentage_1h_in_currency, 1) 
-  const changeIn24h = shortenNumber(data?.price_change_percentage_24h_in_currency, 1)
-  const changeIn7d = shortenNumber(data?.price_change_percentage_7d_in_currency, 1)
+  const changeIn1h = shortenNumber(type === 'searchedCoin' ? 0.00 : data?.price_change_percentage_1h_in_currency, 1) 
+  const changeIn24h = shortenNumber(type === 'searchedCoin' ? data?.price_change_percentage_24h :data?.price_change_percentage_24h_in_currency, 1)
+  const changeIn7d = shortenNumber(type === 'searchedCoin' ? 0.00 : data?.price_change_percentage_7d_in_currency, 1)
 
 return (
     <section className='flex items-end text-sm'>
@@ -73,9 +73,9 @@ return (
           }
         </span>
         <span className={priceStyles}>{currSign}{data?.current_price}</span>
-        <span className={oneHourChangeStyles(changeColor(changeIn1h))}>{changeIn1h === '-0.0' ? '0.0' : changeIn1h}%</span>
+        <span className={oneHourChangeStyles(changeColor(changeIn1h))}>{type === 'searchedCoin' ? '...' : changeIn1h === '-0.0' ? '0.0' : changeIn1h}%</span>
         <span className={oneDayChangeStyles(changeColor(changeIn24h))}>{changeIn24h === '-0.0' ? '0.0' : changeIn24h}%</span>
-        <span className={sevenDaysChangeStyles(changeColor(changeIn7d))}>{changeIn7d === '-0.0' ? '0.0' : changeIn7d}%</span>
+        <span className={sevenDaysChangeStyles(changeColor(changeIn7d))}>{type === 'searchedCoin' ? '...' : changeIn7d === '-0.0' ? '0.0' : changeIn7d}%</span>
         <span className={marketCapStyles}>{currSign}{data?.market_cap}</span>
         <span className={volumeStyles}>{currSign}{data?.total_volume}</span>
   </section>

@@ -28,9 +28,12 @@ export default function Dashboard({}: DashboardProps) {
   
 
 
-  const renderCoinsMarket = data?.map(item => {
+  const renderCoinsMarket = allCoinsData?.map(item => {
       return <Row data={item} key={item.id}/>
   })
+  const renderSelectedCoin = selectedCoin?.map(item => {
+    return <Row data={item} key={item.id} type='searchedCoin' />
+})
 
   // updateCoinsMarket
   console.log(selectedCoin);
@@ -40,7 +43,7 @@ export default function Dashboard({}: DashboardProps) {
     <>
       <div className='bg-main_fourth text-white mary w-full rounded-xl lg:rounded-3xl min-h-40 px-4 py-2 md:px-10 md:py-4'>
         <Row type='description' />
-          {renderCoinsMarket}
+          {selectedCoin !== null ? renderSelectedCoin: renderCoinsMarket}
       </div>
       <div className=" my-8 w-full">
         <TablePagination currentPage={currentPage}/>

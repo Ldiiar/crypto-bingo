@@ -7,7 +7,10 @@ export async function searchCoinById(formData: FormData) {
       const coinId = formData.get('coinName');
 
       async function getCoinById(id: any | null) {
-        const coinId = id?.toLowerCase()
+        const coinId = id?.toLowerCase().trim()
+        if (coinId === '') {
+          return null
+        }
 
         try {
           const options = {
