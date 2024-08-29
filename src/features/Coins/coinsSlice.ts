@@ -1,6 +1,6 @@
 'use client'
 
-import { fetchAllCoinsByOptions } from '@/lib/actions';
+import { fetchAllCoinsByOptions, getChartdata } from '@/lib/actions';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 type TinitialState = {
@@ -10,6 +10,7 @@ type TinitialState = {
 	amountPerPage: '10' | '20' | '50' | '100'
 	pageToSearch: string
 	selectedCoin: Coin[] | null
+	chartData: any | null
 }
 
 let initialState: TinitialState = {
@@ -18,7 +19,8 @@ let initialState: TinitialState = {
 	amountPerPage: '10',
 	currency: 'usd',
 	pageToSearch: '1',
-	selectedCoin: null
+	selectedCoin: null,
+	chartData: null
 };
 
 const burgerSlice = createSlice({
@@ -42,14 +44,16 @@ const burgerSlice = createSlice({
 		},
 		updateSelectedCoin: (state, {payload}) => {
 			state.selectedCoin = payload
-			
-		}
+		},
 	},
 	extraReducers: (builder) => {
 		// Add reducers for additional action types here, and handle loading state as needed
 		builder
 		.addCase(fetchAllCoinsByOptionsAsync.fulfilled, (state, {payload}) => {
 		  state.coinsMarket = payload
+		})
+		.addCase(fetchCoinChartDataAsync.fulfilled, (state, {payload}) => {
+			state.chartData = payload
 		})
 	},
 });
@@ -61,14 +65,25 @@ type TFetchAllCoinsByOptionsAsync  = {
 	page: string;
   }
 
+  type TFetchCoinChartDataAsync = {
+	id: string
+  }
+
 export const fetchAllCoinsByOptionsAsync = createAsyncThunk(
-	'users/fetchAllCoinsByOptionsAsync',
+	'coins/fetchAllCoinsByOptionsAsync',
 	async ({currency, amountPerPage, page}: TFetchAllCoinsByOptionsAsync) => {
 		const response = await fetchAllCoinsByOptions(currency, amountPerPage, page)
 		return response
 	}
   )
-
+export const fetchCoinChartDataAsync = createAsyncThunk(
+	'coins/fetchCoinChartDataAsync',
+	async ({id}: TFetchCoinChartDataAsync) => {
+		const response = await getChartdata(id)
+		console.log('Inside thunk',response);
+		return response
+	}
+)
 
 
 export default burgerSlice.reducer;

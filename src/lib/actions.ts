@@ -34,7 +34,7 @@ export async function searchCoinById(coinId: string) {
       try {
         const options = {
           method: 'GET',
-          headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-y4oi4BVxGcw1ZjgsAHb4QF4V'}
+          headers: {accept: 'application/json', 'x-cg-demo-api-key':  API_KEY as string}
         };
         
         const res = await fetch(`${BASE_URL}/coins/markets?vs_currency=${currency}&per_page=${amountPerPage}&page=${page}&price_change_percentage=1h%2C24h%2C7d`, options)
@@ -45,3 +45,18 @@ export async function searchCoinById(coinId: string) {
           return null
         }
     }
+
+  export async function getChartdata(id: string) {
+    const options = {
+      method: 'GET',
+      headers: {accept: 'application/json', 'x-cg-demo-api-key': API_KEY as string}
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL}/coins/${id}/market_chart?vs_currency=usd&days=1`, options)
+      const data = response.json()
+      return data
+    } catch (error) {
+      return null
+    }
+  }

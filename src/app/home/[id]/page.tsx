@@ -1,5 +1,7 @@
+import { CoinChart } from '@/components/coin-chart';
+import CoinChartPart from '@/components/coin-chart-part';
 import CoinInfoPart from '@/components/coin-info-part';
-import { searchCoinById } from '@/lib/actions';
+import { getChartdata, searchCoinById } from '@/lib/actions';
 
 type CoinPageProps = {
     params: any
@@ -14,7 +16,7 @@ export default async function CoinPage({params}: CoinPageProps) {
     <main className='mt-[50px]  w-full text-main_fourth'>
         <section className='lg:flex w-full'>
             <CoinInfoPart data={coinData}/>
-            <div className="pl-[2px] lg:w-[70%] bg-green-200">R</div>
+            <CoinChartPart id={params.id}/>
         </section>
     </main>
   )
