@@ -53,7 +53,7 @@ export async function searchCoinById(coinId: string) {
     };
 
     try {
-      const response = await fetch(`${BASE_URL}/coins/${id}/market_chart?vs_currency=usd&days=1`, options)
+      const response = await fetch(`${BASE_URL}/coins/${id}/market_chart?vs_currency=usd&days=30`, options)
       const data = response.json()
       return data
     } catch (error) {

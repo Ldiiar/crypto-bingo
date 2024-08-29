@@ -80,7 +80,6 @@ export const fetchCoinChartDataAsync = createAsyncThunk(
 	'coins/fetchCoinChartDataAsync',
 	async ({id}: TFetchCoinChartDataAsync) => {
 		const response = await getChartdata(id)
-		console.log('Inside thunk',response);
 		return response
 	}
 )

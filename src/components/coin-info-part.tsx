@@ -43,7 +43,7 @@ export default function CoinInfoPart({data}: CoinInfoPartProps) {
     function infoRow(){
         return infoRowData.map(item => {
             return (
-                <div className="flex justify-between text-sm font-semibold border-b border-zinc-300 py-3">
+                <div className="flex justify-between text-sm font-semibold border-b border-zinc-300 py-3" key={item.name}>
                     <span className='text-main_secondary'>{item.name}</span>
                     <span className=''>${item.data}</span>
                 </div>

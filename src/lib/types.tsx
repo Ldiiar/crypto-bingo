@@ -29,3 +29,9 @@ type Coin = {
 	price_change_percentage_24h_in_currency: number;
 	price_change_percentage_7d_in_currency: number;
 };
+
+
+type chartData = {
+	date: string
+	price: number
+}[]

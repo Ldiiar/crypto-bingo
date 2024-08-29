@@ -19,26 +19,47 @@ import {
 } from "@/components/ui/chart"
 import { useSelector } from 'react-redux'
 import { RootState } from '@/features/store'
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-]
+import { useState } from 'react'
+// const chartData = [
+//   { month: "January", desktop: 186 },
+//   { month: "February", desktop: 305 },
+//   { month: "March", desktop: 237 },
+//   { month: "April", desktop: 73 },
+//   { month: "May", desktop: 209 },
+//   { month: "June", desktop: 214 },
+// ]
+
+
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
+    label: "Price",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig
 
 export function CoinChart() {
+    const [chartData, setChartData] = useState<chartData | []>([])
     const coinChartData = useSelector((state: RootState) => state.coinsMarket.chartData)
-    console.log('Coin', coinChartData);
+    const marketCapChartData = coinChartData?.market_caps
+    const pricesChartData: any = coinChartData?.prices
+    const totalVolumeData = coinChartData?.total_volumes
+    console.log('Prices data', pricesChartData);
+
+  
+    let finalArray: chartData = []
+    async function getChartValue() {
+    pricesChartData?.map((item: any) => {
+      finalArray.push({date: `${new Date(item[0]).toLocaleDateString().slice(0, -5)}`, price: item[1]})
+    })
+  }
+  if (pricesChartData) {
+    getChartValue()
+    console.log(finalArray);
     
+  }
+  
+
 
   return (
     <Card>
@@ -50,7 +71,7 @@ export function CoinChart() {
         <ChartContainer config={chartConfig}>
           <LineChart
             accessibilityLayer
-            data={chartData}
+            data={finalArray}
             margin={{
               left: 12,
               right: 12,
@@ -58,7 +79,7 @@ export function CoinChart() {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="date"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
@@ -69,7 +90,7 @@ export function CoinChart() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Line
-              dataKey="desktop"
+              dataKey="price"
               type="natural"
               stroke="var(--color-desktop)"
               strokeWidth={2}
@@ -83,7 +104,7 @@ export function CoinChart() {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing prices for the last 6 months
         </div>
       </CardFooter>
     </Card>
