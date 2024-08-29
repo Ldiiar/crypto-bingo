@@ -2,6 +2,7 @@
 import { RootState } from '@/features/store'
 import { changeColor, cn, getCurrencySign, shortenNumber } from '@/lib/utils'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useSelector } from 'react-redux'
 
 type RowProps = {
@@ -10,8 +11,6 @@ type RowProps = {
 }
 
 export default function Row({data, type}: RowProps) {
-  console.log('ROW get:',data);
-  
   const generalOfRow = 'py-3'
   const currency = useSelector((state: RootState) => state.coinsMarket.currency)
   const currSign = getCurrencySign(currency)
@@ -51,7 +50,7 @@ export default function Row({data, type}: RowProps) {
   }
 
   const changeIn1h = shortenNumber(type === 'searchedCoin' ? 0.00 : data?.price_change_percentage_1h_in_currency, 1) 
-  const changeIn24h = shortenNumber(type === 'searchedCoin' ? data?.price_change_percentage_24h :data?.price_change_percentage_24h_in_currency, 1)
+  const changeIn24h = shortenNumber(type === 'searchedCoin' ? data?.price_change_percentage_24h : data?.price_change_percentage_24h_in_currency, 1)
   const changeIn7d = shortenNumber(type === 'searchedCoin' ? 0.00 : data?.price_change_percentage_7d_in_currency, 1)
 
 return (
@@ -65,10 +64,10 @@ return (
               width={30}
               height={30}
               className='w-[25px] mr-4'/>
-              <div className="flex flex-col sm:flex-row sm:justify-start">
+              <Link href={`/home/${data.id}`} className="flex flex-col sm:flex-row sm:justify-start">
                 {data?.name}
                 <span className='opacity-80 font-light text-xs sm:ml-2'>{data?.symbol.toLocaleUpperCase()}</span>
-              </div>
+              </Link>
             </>
           }
         </span>

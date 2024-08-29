@@ -21,8 +21,8 @@ export default function SearcCoinForm() {
 		}
 
 		async function SearchIcon(formData: FormData) {
-			const response: Coin[] = await searchCoinById(formData)
-			console.log(response);
+			const coinId = formData.get('coinName') as string;
+			const response: Coin[] = await searchCoinById(coinId)
 			dispatch(updateSelectedCoin(response))
 		}
 

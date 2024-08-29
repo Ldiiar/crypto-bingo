@@ -3,9 +3,7 @@
 const API_KEY = process.env.API_KEY
 const BASE_URL = process.env.BASE_URL
 
-export async function searchCoinById(formData: FormData) {
-      const coinId = formData.get('coinName');
-
+export async function searchCoinById(coinId: string) {
       async function getCoinById(id: any | null) {
         const coinId = id?.toLowerCase().trim()
         if (coinId === '') {

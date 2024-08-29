@@ -8,8 +8,18 @@ import Wrapper from '@/components/wrapper';
 
 
 export default async function Home() {
-  
-  return (
+    const options = {
+      method: 'GET',
+      headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-y4oi4BVxGcw1ZjgsAHb4QF4V'}
+    };
+    
+    const response: any = await fetch('https://api.coingecko.com/api/v3/global', options)
+    const data = await response.json()
+    const totalCoinData: number = data.data.active_cryptocurrencies
+    
+
+
+    return (
     <main className=''>
       <H1>
           <TextEffect per='char' as='span' preset='fade'>
@@ -25,7 +35,7 @@ export default async function Home() {
           </div>
         </section>
         <Wrapper >
-            <Dashboard/>
+            <Dashboard totalCoinData={totalCoinData}/>
         </Wrapper>   
     </main>
   )

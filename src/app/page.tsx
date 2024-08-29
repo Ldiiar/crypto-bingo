@@ -14,9 +14,9 @@ export default function Home() {
       <div className="flex flex-col items-center w-full mb-[140px]">
         <Image src={gifSrc} alt='Image' width={200} height={200} className='w-1/2 min-w-[300px] h-48 mb-14 mt-10'/>
         <H1>
-        <TextEffect per='word' as='span' preset='slide'>
-            {slogan}
-           </TextEffect>
+          <TextEffect per='word' as='span' preset='slide'>
+              {slogan}
+          </TextEffect>
         </H1>
         <p className='text-main_secondary mb-[10px] font-semibold'>It&apos;s a free platform</p>
         <Link href='/home'>

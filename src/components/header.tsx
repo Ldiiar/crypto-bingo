@@ -8,7 +8,6 @@ import Container from './container';
 export default function Header() {
   const pathname = usePathname()
 
-  //
   const options = [
     {
       name: 'Markets',
