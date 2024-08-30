@@ -33,5 +33,5 @@ type Coin = {
 
 type chartData = {
 	date: string
-	price: number
+	price: number | null
 }[]

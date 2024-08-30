@@ -19,17 +19,18 @@ import {
 } from "@/components/ui/chart"
 import { useSelector } from 'react-redux'
 import { RootState } from '@/features/store'
-import { useState } from 'react'
 // const chartData = [
 //   { month: "January", desktop: 186 },
-//   { month: "February", desktop: 305 },
-//   { month: "March", desktop: 237 },
-//   { month: "April", desktop: 73 },
-//   { month: "May", desktop: 209 },
 //   { month: "June", desktop: 214 },
 // ]
 
 
+
+
+type CoinChartProps = {
+  serachParam: "price" | "totalVolume" | "marketCap"
+  handleChangeParam: (value: "price" | "totalVolume" | "marketCap") => void
+}
 
 const chartConfig = {
   desktop: {
@@ -37,35 +38,58 @@ const chartConfig = {
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig
+export function CoinChart({serachParam, handleChangeParam}: CoinChartProps) {
+    const coinFullChartData = useSelector((state: RootState) => state.coinsMarket.chartData)
+    const marketCapChartData = coinFullChartData?.market_caps
+    const pricesChartData = coinFullChartData?.prices
+    const totalVolumeData = coinFullChartData?.total_volumes
 
-export function CoinChart() {
-    const [chartData, setChartData] = useState<chartData | []>([])
-    const coinChartData = useSelector((state: RootState) => state.coinsMarket.chartData)
-    const marketCapChartData = coinChartData?.market_caps
-    const pricesChartData: any = coinChartData?.prices
-    const totalVolumeData = coinChartData?.total_volumes
-    console.log('Prices data', pricesChartData);
-
+    let chartDataToShow: chartData
+    switch (serachParam) {
+      case 'price':
+        chartDataToShow = pricesChartData
+        break;
+      case 'marketCap':
+        chartDataToShow = marketCapChartData
+        break;
+      case 'totalVolume':
+        chartDataToShow = totalVolumeData
+        break;
+      default: 
+        break;
+    }
   
-    let finalArray: chartData = []
+    let finalArray: chartData = [{date: '2024', price: null}]
     async function getChartValue() {
-    pricesChartData?.map((item: any) => {
-      finalArray.push({date: `${new Date(item[0]).toLocaleDateString().slice(0, -5)}`, price: item[1]})
-    })
-  }
+      await chartDataToShow?.map((item: any) => {
+        finalArray.push({date: `${new Date(item[0]).toLocaleDateString().slice(0, -5)}`, price: item[1]})
+      })
+      return
+    }
+
   if (pricesChartData) {
-    getChartValue()
-    console.log(finalArray);
-    
+    getChartValue().then()
   }
   
-
 
   return (
-    <Card>
+    <Card className='text-green'>
       <CardHeader>
-        <CardTitle>Line Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        {/* <CardTitle></CardTitle> */}
+        {/* <CardDescription>{finalArray[0]?.date}January - June 2024</CardDescription> */}
+        <CardDescription>
+          <div className="flex gap-x-1 items-center bg-zinc-100 w-[50%] h-[35px] rounded-xl font-semibold p-[6px] text-main_secondary">
+              <button className={`px-4 py-1 rounded-md cursor-pointer ${serachParam === 'price' && 'bg-white text-black'}`}
+              onClick={() => handleChangeParam('price')}
+              >Price</button>
+              <button className={`px-4 py-1 rounded-md cursor-pointer ${serachParam === 'marketCap' && 'bg-white text-black'}`} 
+              onClick={() => handleChangeParam('marketCap')}
+              >Market Cap</button>
+              <button className={`px-4 py-1 rounded-md cursor-pointer ${serachParam === 'totalVolume' && 'bg-white text-black'}`}
+              onClick={() => handleChangeParam('totalVolume')}
+              >Total Volume</button>
+          </div>
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -83,14 +107,14 @@ export function CoinChart() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => value.slice(0, 4)}
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
             <Line
-              dataKey="price"
+              dataKey='price'
               type="natural"
               stroke="var(--color-desktop)"
               strokeWidth={2}
@@ -101,7 +125,7 @@ export function CoinChart() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="leading-none text-muted-foreground">
-          Showing prices for the last 1 months
+          Showing data for the last 1 months
         </div>
       </CardFooter>
     </Card>
