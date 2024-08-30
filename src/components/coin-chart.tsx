@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/chart"
 import { useSelector } from 'react-redux'
 import { RootState } from '@/features/store'
+import { useState } from 'react'
 // const chartData = [
 //   { month: "January", desktop: 186 },
 //   { month: "June", desktop: 214 },
@@ -27,10 +28,10 @@ import { RootState } from '@/features/store'
 
 
 
-type CoinChartProps = {
-  serachParam: "price" | "totalVolume" | "marketCap"
-  handleChangeParam: (value: "price" | "totalVolume" | "marketCap") => void
-}
+// type CoinChartProps = {
+//   serachParam: "price" | "totalVolume" | "marketCap"
+//   handleChangeParam: (value: "price" | "totalVolume" | "marketCap") => void
+// }
 
 const chartConfig = {
   desktop: {
@@ -38,22 +39,32 @@ const chartConfig = {
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig
-export function CoinChart({serachParam, handleChangeParam}: CoinChartProps) {
+export function CoinChart() {
+    const [searchParam, setSearchParam] = useState<'price' | 'totalVolume' | 'marketCap'>('price')
+    	function handleChangeParam (value: 'price' | 'totalVolume' | 'marketCap') {
+        if (searchParam !== value) {
+          setSearchParam(value)
+        }
+      }
     const coinFullChartData = useSelector((state: RootState) => state.coinsMarket.chartData)
     const marketCapChartData = coinFullChartData?.market_caps
     const pricesChartData = coinFullChartData?.prices
     const totalVolumeData = coinFullChartData?.total_volumes
 
     let chartDataToShow: chartData
-    switch (serachParam) {
+    let label
+    switch (searchParam) {
       case 'price':
         chartDataToShow = pricesChartData
+        label = 'price'
         break;
       case 'marketCap':
         chartDataToShow = marketCapChartData
+        label = 'market cap'
         break;
       case 'totalVolume':
         chartDataToShow = totalVolumeData
+        label = 'total volume'
         break;
       default: 
         break;
@@ -75,17 +86,17 @@ export function CoinChart({serachParam, handleChangeParam}: CoinChartProps) {
   return (
     <Card className='text-green'>
       <CardHeader>
-        {/* <CardTitle></CardTitle> */}
-        {/* <CardDescription>{finalArray[0]?.date}January - June 2024</CardDescription> */}
+        <CardTitle>Chart data</CardTitle>
+        <CardDescription>This is our gathered data about this coin represented as a chart.</CardDescription>
         <CardDescription>
-          <div className="flex gap-x-1 items-center bg-zinc-100 w-[50%] h-[35px] rounded-xl font-semibold p-[6px] text-main_secondary">
-              <button className={`px-4 py-1 rounded-md cursor-pointer ${serachParam === 'price' && 'bg-white text-black'}`}
+          <div className="flex gap-x-1 items-center bg-zinc-100 min-w-[300px] w-[50%] min-h-[35px] rounded-xl font-semibold p-[6px] text-main_secondary">
+              <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'price' && 'bg-white text-black'}`}
               onClick={() => handleChangeParam('price')}
               >Price</button>
-              <button className={`px-4 py-1 rounded-md cursor-pointer ${serachParam === 'marketCap' && 'bg-white text-black'}`} 
+              <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'marketCap' && 'bg-white text-black'}`} 
               onClick={() => handleChangeParam('marketCap')}
               >Market Cap</button>
-              <button className={`px-4 py-1 rounded-md cursor-pointer ${serachParam === 'totalVolume' && 'bg-white text-black'}`}
+              <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'totalVolume' && 'bg-white text-black'}`}
               onClick={() => handleChangeParam('totalVolume')}
               >Total Volume</button>
           </div>

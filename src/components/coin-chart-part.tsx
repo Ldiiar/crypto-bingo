@@ -12,18 +12,12 @@ type CoinChartPartProps = {
 }
 
 export default function CoinChartPart({id}: CoinChartPartProps) {
-    const [serachParam, setSearchParam] = useState<'price' | 'totalVolume' | 'marketCap'>('price')
-	function handleChangeParam (value: 'price' | 'totalVolume' | 'marketCap') {
-		if (serachParam !== value) {
-			setSearchParam(value)
-		}
-	}
     const dispatch = useDispatch<AppDispatch>()
     dispatch(fetchCoinChartDataAsync({id}))
 	return (
 		<div className='pl-[2px] lg:w-[70%] bg-green-200'>
 			<div className=''>
-					<CoinChart serachParam={serachParam} handleChangeParam={handleChangeParam}/>
+					<CoinChart/>
                 {/* <COinChartAxes /> */}
 			</div>
 		</div>
