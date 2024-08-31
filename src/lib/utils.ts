@@ -9,7 +9,7 @@ export function shortenNumber(num: number | undefined, decimalPlaces: number) {
   return num?.toFixed(decimalPlaces);
 }
 
-function checkNumberSign(value: string) {
+export function checkNumberSign(value: string) {
   const number = parseFloat(value);
 
   if (isNaN(number)) {
@@ -39,6 +39,23 @@ export function changeColor (number: string | undefined,) {
     default:
       return ''
   }
+}
+
+export function changeBareColor(number: string | undefined) {
+  if (number) {
+    const sign = checkNumberSign(number)
+    switch(sign) {
+      case 'Negative':
+        return '#eb0101'
+      case 'Positive':
+        return '#01a101'
+      case 'Zero':
+        return '#289f00'
+      default:
+        return ''
+    }
+}
+
 }
 
 export function getSearchedCoin(allCoins: Coin[] | null, prompt: string){

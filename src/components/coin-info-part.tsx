@@ -53,7 +53,7 @@ export default function CoinInfoPart({data}: CoinInfoPartProps) {
     
 
 	return (
-    <section className='lg:w-[30%] lg:pr-[25px] border-r border-x-zinc-300'>
+    <section className='lg:w-[30%] lg:pr-[25px]'>
         <div className="flex items-center gap-1 mb-3">
             {coinData?.[0]?.image &&
                 <Image src={coinData?.[0]?.image} alt='Icon'
