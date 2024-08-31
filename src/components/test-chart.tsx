@@ -35,9 +35,11 @@ export const description = "A simple area chart"
 
 type CoinChartProps = {
   changeIn24h: string | undefined
+  periodTime: '24h' | '7d' | '1m' | '3m' | '6m' | '1y'
+  handleChangePeridTime: (value: '24h' | '7d' | '1m' | '3m' | '6m' | '1y') => void
 }
 
-export function TestChart({changeIn24h}: CoinChartProps) {
+export function TestChart({changeIn24h, periodTime, handleChangePeridTime}: CoinChartProps) {
     const [searchParam, setSearchParam] = useState<'price' | 'totalVolume' | 'marketCap'>('price')
     function handleChangeParam (value: 'price' | 'totalVolume' | 'marketCap') {
     if (searchParam !== value) {
@@ -68,10 +70,13 @@ export function TestChart({changeIn24h}: CoinChartProps) {
       break;
   }
 
-  let finalArray: chartData = [{date: '2024', price: null}]
+  let finalArray: chartData = []
   async function getChartValue() {
     await chartDataToShow?.map((item: any) => {
-      finalArray.push({date: `${new Date(item[0]).toLocaleDateString().slice(0, -5)}`, price: item[1]})
+      let unformattedDate = `${new Date(item[0])}`
+      finalArray.push(
+        {date: `${unformattedDate.slice(0, -17)}`, value: item[1]}
+      )
     })
     return
   }
@@ -82,32 +87,55 @@ export function TestChart({changeIn24h}: CoinChartProps) {
 
   const chartConfig = {
     desktop: {
-      label: "Price",
+      label: "Value",
       color: `${changeBareColor(changeIn24h)}`,
     },
   } satisfies ChartConfig
 
   return (
-    <Card className='bg-white border-0'>
-      <CardHeader>
-        <CardTitle>Chart data</CardTitle>
+    <Card className='bg-transparent border-0 lg:pl-[25px]'>
+      <CardHeader className='p-0'>
+        <CardTitle>Graph</CardTitle>
         <CardDescription>This is our gathered data about this coin represented as a chart.</CardDescription>
         <CardDescription>
-          <div className="flex gap-x-1 items-center bg-zinc-100 min-w-[300px] w-[50%] min-h-[35px] rounded-xl font-semibold p-[6px] text-main_secondary">
-              <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'price' && 'bg-white text-black'}`}
-              onClick={() => handleChangeParam('price')}
-              >Price</button>
-              <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'marketCap' && 'bg-white text-black'}`} 
-              onClick={() => handleChangeParam('marketCap')}
-              >Market Cap</button>
-              <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'totalVolume' && 'bg-white text-black'}`}
-              onClick={() => handleChangeParam('totalVolume')}
-              >Total Volume</button>
+          <div className="flex flex-col gap-y-2 lg:flex-row lg:justify-between mb-[60px]">
+            <div className="flex gap-x-1 items-center bg-main_secondary w-fit min-h-[35px] rounded-xl font-semibold p-[6px] text-white">
+                <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'price' && 'bg-white text-black'}`}
+                onClick={() => handleChangeParam('price')}
+                >Price</button>
+                <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'marketCap' && 'bg-white text-black'}`} 
+                onClick={() => handleChangeParam('marketCap')}
+                >Market Cap</button>
+                <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${searchParam === 'totalVolume' && 'bg-white text-black'}`}
+                onClick={() => handleChangeParam('totalVolume')}
+                >Total Volume</button>
+            </div>
+            <div className="flex gap-x-1 items-center bg-main_secondary w-fit min-h-[35px] rounded-xl font-semibold p-[6px] text-white">
+              <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${periodTime === '24h' && 'bg-white text-black'}`}
+                  onClick={() => handleChangePeridTime('24h')}
+                  >24h</button>
+                  <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${periodTime === '7d' && 'bg-white text-black'}`} 
+                  onClick={() => handleChangePeridTime('7d')}
+                  >7d</button>
+                  <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${periodTime === '1m' && 'bg-white text-black'}`}
+                  onClick={() => handleChangePeridTime('1m')}
+                  >1m</button>
+                  <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${periodTime === '3m' && 'bg-white text-black'}`}
+                  onClick={() => handleChangePeridTime('3m')}
+                  >3m</button>
+                  <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${periodTime === '6m' && 'bg-white text-black'}`}
+                  onClick={() => handleChangePeridTime('6m')}
+                  >6m</button>
+                  <button className={`h-full px-4 py-1 rounded-md cursor-pointer ${periodTime === '1y' && 'bg-white text-black'}`}
+                  onClick={() => handleChangePeridTime('1y')}
+                  >1y</button>
+            </div>
           </div>
+          
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      <CardContent className='p-0'>
+        <ChartContainer config={chartConfig} className=''>
           <AreaChart
             accessibilityLayer
             data={finalArray}
@@ -122,14 +150,14 @@ export function TestChart({changeIn24h}: CoinChartProps) {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 4)}
+              tickFormatter={(value) => new Date(value).toLocaleDateString().slice(0, 4)}
             />
             <ChartTooltip
               cursor={true}
               content={<ChartTooltipContent indicator="dot" />}
             />
             <Area
-              dataKey="price"
+              dataKey="value"
               type="natural"
               fill="var(--color-desktop)"
               fillOpacity={0.4}
@@ -138,18 +166,18 @@ export function TestChart({changeIn24h}: CoinChartProps) {
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
+      {/* <CardFooter>
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
-            {/* <div className="flex items-center gap-2 font-medium leading-none">
+            <div className="flex items-center gap-2 font-medium leading-none">
               Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
             </div>
             <div className="flex items-center gap-2 leading-none text-muted-foreground">
               January - June 2024
-            </div> */}
+            </div>
           </div>
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   )
 }

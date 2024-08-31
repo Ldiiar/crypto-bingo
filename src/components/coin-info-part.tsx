@@ -53,7 +53,7 @@ export default function CoinInfoPart({data}: CoinInfoPartProps) {
     
 
 	return (
-    <section className='lg:w-[30%] lg:pr-[25px]'>
+    <section className='lg:w-[35%] lg:pr-[25px]'>
         <div className="flex items-center gap-1 mb-3">
             {coinData?.[0]?.image &&
                 <Image src={coinData?.[0]?.image} alt='Icon'
@@ -80,10 +80,10 @@ export default function CoinInfoPart({data}: CoinInfoPartProps) {
                 <span>${coinData?.[0]?.high_24h}</span>
             </div>
         </div>
-        <section className='mb-4'>
+        <section className='mb-16'>
                 {infoRow()}
         </section>
-        <div className="mb-4">
+        <div className="mb-8">
             <p className='font-semibold text-lg'>What are your thoughts about {coinData?.[0]?.symbol.toUpperCase()}? </p>
             <p className='text-sm'>Should we invest in it today?</p>
         </div>

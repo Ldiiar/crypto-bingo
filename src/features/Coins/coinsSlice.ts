@@ -67,6 +67,7 @@ type TFetchAllCoinsByOptionsAsync  = {
 
   type TFetchCoinChartDataAsync = {
 	id: string
+	periodTime: string
   }
 
 export const fetchAllCoinsByOptionsAsync = createAsyncThunk(
@@ -78,8 +79,8 @@ export const fetchAllCoinsByOptionsAsync = createAsyncThunk(
   )
 export const fetchCoinChartDataAsync = createAsyncThunk(
 	'coins/fetchCoinChartDataAsync',
-	async ({id}: TFetchCoinChartDataAsync) => {
-		const response = await getChartdata(id)
+	async ({id, periodTime}: TFetchCoinChartDataAsync) => {
+		const response = await getChartdata(id, periodTime)
 		return response
 	}
 )

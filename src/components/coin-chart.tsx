@@ -70,10 +70,10 @@ export function CoinChart() {
         break;
     }
   
-    let finalArray: chartData = [{date: '2024', price: null}]
+    let finalArray: chartData = [{date: '2024', value: null}]
     async function getChartValue() {
       await chartDataToShow?.map((item: any) => {
-        finalArray.push({date: `${new Date(item[0]).toLocaleDateString().slice(0, -5)}`, price: item[1]})
+        finalArray.push({date: `${new Date(item[0]).toLocaleDateString().slice(0, -5)}`, value: item[1]})
       })
       return
     }
@@ -125,7 +125,7 @@ export function CoinChart() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Line
-              dataKey='price'
+              dataKey='value'
               type="natural"
               stroke="var(--color-desktop)"
               strokeWidth={2}

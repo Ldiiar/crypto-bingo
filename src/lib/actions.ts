@@ -46,14 +46,38 @@ export async function searchCoinById(coinId: string) {
         }
     }
 
-  export async function getChartdata(id: string) {
+  export async function getChartdata(id: string, periodTime: string) {
+    let days
+    switch (periodTime) {
+      case '24h':
+        days = 1
+        break;
+      case '7d':
+        days = 7
+        break;
+      case '1m':
+        days = 30
+        break;
+      case '3m':
+        days = 90
+        break;
+      case '6m':
+        days = 180
+        break;
+      case '6m':
+        days = 365
+        break;
+      default:
+        days = 1
+        break;
+    }
     const options = {
       method: 'GET',
       headers: {accept: 'application/json', 'x-cg-demo-api-key': API_KEY as string}
     };
 
     try {
-      const response = await fetch(`${BASE_URL}/coins/${id}/market_chart?vs_currency=usd&days=7`, options)
+      const response = await fetch(`${BASE_URL}/coins/${id}/market_chart?vs_currency=usd&days=${days}`, options)
       const data = response.json()
       return data
     } catch (error) {
