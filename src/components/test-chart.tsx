@@ -40,7 +40,7 @@ type CoinChartProps = {
 }
 
 export function TestChart({changeIn24h, periodTime, handleChangePeridTime}: CoinChartProps) {
-    const [searchParam, setSearchParam] = useState<'price' | 'totalVolume' | 'marketCap'>('price')
+    const [searchParam, setSearchParam] = useState<'price' | 'totalVolume' | 'marketCap'>('marketCap')
     function handleChangeParam (value: 'price' | 'totalVolume' | 'marketCap') {
     if (searchParam !== value) {
       setSearchParam(value)
@@ -135,7 +135,7 @@ export function TestChart({changeIn24h, periodTime, handleChangePeridTime}: Coin
         </CardDescription>
       </CardHeader>
       <CardContent className='p-0'>
-        <ChartContainer config={chartConfig} className=''>
+        <ChartContainer config={chartConfig}>
           <AreaChart
             accessibilityLayer
             data={finalArray}
@@ -144,7 +144,7 @@ export function TestChart({changeIn24h, periodTime, handleChangePeridTime}: Coin
               right: 12,
             }}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false}/>
             <XAxis
               dataKey="date"
               tickLine={false}

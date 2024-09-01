@@ -8,9 +8,10 @@ import { useSelector } from 'react-redux'
 type RowProps = {
     data?: Coin | null
     type?: 'description' | 'searchedCoin' | undefined
+    top5List?: boolean
 }
 
-export default function Row({data, type}: RowProps) {
+export default function Row({data, type, top5List}: RowProps) {
   const generalOfRow = 'py-3'
   const currency = useSelector((state: RootState) => state.coinsMarket.currency)
   const currSign = getCurrencySign(currency)

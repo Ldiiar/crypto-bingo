@@ -84,3 +84,14 @@ export async function searchCoinById(coinId: string) {
       return null
     }
   }
+
+  export async function getTopFiveCoins() {
+    const options = {
+      method: 'GET',
+      headers: {accept: 'application/json', 'x-cg-demo-api-key': API_KEY  as string}
+    };
+    
+  const response = await fetch(`${BASE_URL}/coins/markets?vs_currency=usd&per_page=5&price_change_percentage=24`, options)
+  const topCoinsData: Coin[] = await response.json()
+  return topCoinsData
+  }

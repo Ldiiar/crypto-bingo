@@ -13,7 +13,7 @@ type CoinChartPartProps = {
 }
 
 export default function CoinChartPart({id, changeIn24h}: CoinChartPartProps) {
-	const [periodTime, setPeriodTime] = useState<'24h' | '7d' | '1m' | '3m' | '6m' | '1y'>('24h')
+	const [periodTime, setPeriodTime] = useState<'24h' | '7d' | '1m' | '3m' | '6m' | '1y'>('1m')
 	function handleChangePeridTime(value: '24h' | '7d' | '1m' | '3m' | '6m' | '1y') {
 		setPeriodTime(value)
 	}

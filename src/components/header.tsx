@@ -10,18 +10,23 @@ export default function Header() {
 
   const options = [
     {
-      name: 'Markets',
-      link: 'home',
+      name: 'About',
+      link: '/about',
+      active: pathname.includes('contact') ? true : false
+    },
+    {
+      name: 'Marketplace',
+      link: '/home',
       active: pathname.includes('home') ? true : false
     },
     {
       name: 'Policy',
-      link: 'policy',
+      link: '/policy',
       active: pathname.includes('policy') ? true : false
     },
     {
-      name: 'Contact',
-      link: 'contact',
+      name: 'Contacts',
+      link: '/contacts',
       active: pathname.includes('contact') ? true : false
     },
   ]
@@ -35,8 +40,8 @@ export default function Header() {
                 <ul className='flex gap-8'>
                  { options.map( (option) => {
                    return <Link href={option.link} key={option.link}>
-                      <li className={`cursor-pointer font-medium transition hover:text-main_third/90 hover:border-b-2 pt-1 hover:border-main_third  
-                      ${option.active ? 'border-b-2 border-main_third text-main_third' : 'border-b-2 border-transparent'}`} key={option.link}>{option.name}</li>
+                      <li className={`cursor-pointer transition hover:text-main_third/90 hover:border-b-2 pt-1 hover:border-main_third  font-semibold
+                      ${option.active ? 'border-b-2 border-main_third text-main_third' : 'border-b-2 border-transparent'}`} key={option.link}>{option.name.toUpperCase()}</li>
                      </Link>
                   })}
                 </ul>
