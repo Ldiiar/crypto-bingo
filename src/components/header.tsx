@@ -12,7 +12,7 @@ export default function Header() {
     {
       name: 'About',
       link: '/about',
-      active: pathname.includes('contact') ? true : false
+      active: pathname.includes('about') ? true : false
     },
     {
       name: 'Marketplace',
@@ -27,7 +27,7 @@ export default function Header() {
     {
       name: 'Contacts',
       link: '/contacts',
-      active: pathname.includes('contact') ? true : false
+      active: pathname.includes('contacts') ? true : false
     },
   ]
   

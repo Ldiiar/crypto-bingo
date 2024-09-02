@@ -16,8 +16,8 @@ export default async function CoinPage({params}: CoinPageProps) {
     
     
   return (
-    <main className='mt-[50px]  w-full text-main_fourth '>
-        <section className='lg:flex w-full'>
+    <main className='mt-[50px]  w-full text-main_fourthborder border-purple-500'>
+        <section className='lg:flex w-full mb-[80px]'>
             <CoinInfoPart data={coinData} />
             <CoinChartPart id={params.id} changeIn24h={changeIn24h}/>
         </section>
