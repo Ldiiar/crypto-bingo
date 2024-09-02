@@ -1,6 +1,6 @@
 export default function PolicyPage() {
   return (
-    <article className='w-2/3 m-auto mt-10 space-y-4 min-h-screen'>
+    <article className='lg:w-2/3 m-auto mt-10 space-y-4 min-h-screen'>
         <h1 className='font-bold text-2xl'>Privacy Policy</h1>
         <p>At <span className='text-main_third font-semibold'>Crypto-bingo</span>, protecting your privacy is a top priority. This policy outlines how we collect, use, and safeguard your personal information.</p>
         <p>We collect data that you provide directly, such as your name, email, and transaction details, along with information about your use of our app. This helps us enhance your experience and improve our services. We do not sell or share your information with third parties without your consent, except when required by law.</p>
