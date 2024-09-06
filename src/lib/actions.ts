@@ -95,3 +95,4 @@ export async function searchCoinById(coinId: string) {
   const topCoinsData: Coin[] = await response.json()
   return topCoinsData
   }
+  

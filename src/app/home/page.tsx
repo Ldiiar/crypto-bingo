@@ -8,12 +8,15 @@ import Wrapper from '@/components/wrapper';
 
 
 export default async function Home() {
+  const API_KEY = process.env.API_KEY
+  const BASE_URL = process.env.BASE_URL
+  
     const options = {
       method: 'GET',
-      headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-y4oi4BVxGcw1ZjgsAHb4QF4V'}
+      headers: {accept: 'application/json', 'x-cg-demo-api-key': API_KEY as string}
     };
     
-    const response: any = await fetch('https://api.coingecko.com/api/v3/global', options)
+    const response: any = await fetch(`${BASE_URL}/global`, options)
     const data = await response.json()
     const totalCoinData: number = data.data.active_cryptocurrencies
     
@@ -21,7 +24,7 @@ export default async function Home() {
 
     return (
     <main className=''>
-      <H1>
+      <H1 className='mb-5 lg:mb-8 mt-10'>
           <TextEffect per='char' as='span' preset='fade'>
               Crypto Marketplace
          </TextEffect>     
